@@ -16,8 +16,13 @@ public class PlayerManagerTest {
 	private final static String NAME_1 = "Grzegorz";
 	private final static String LASTNAME_1 = "Niciński";
 	private final static String POSITION_1 = "Striker";
-	private final static String POSITION_2 = "Defender";
-	private final static int AGE_1 = 31;
+	private final static int AGE_1 = 35;
+	
+	private final static String NAME_2 = "Krzysztof";
+	private final static String LASTNAME_2 = "Sobieraj";
+	private final static String POSITION_2 = "Defender";	
+	private final static int AGE_2 = 31;
+	
 	
 	@Test
 	public void checkConnection(){
@@ -63,10 +68,14 @@ public class PlayerManagerTest {
 		assertEquals(1,playerManager.addPlayer(player));
 		assertEquals(1,playerManager.addPlayer(player));
 		
+		Player player2 = new Player(NAME_2, LASTNAME_2, POSITION_2, AGE_2);
+		assertEquals(1,playerManager.addPlayer(player2));
+		assertEquals(1,playerManager.addPlayer(player2));
+		assertEquals(1,playerManager.addPlayer(player2));
 		
 		List<Player> players = playerManager.getAllPlayers();
 		
-		assertSame(3, players.size());
+		assertSame(6, players.size());
 		
 		playerManager.clearPlayers();
 		
