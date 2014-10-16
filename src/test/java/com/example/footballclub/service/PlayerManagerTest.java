@@ -98,5 +98,29 @@ public class PlayerManagerTest {
 
 		
 	}
+	
+	@Test
+	public void checkSelectOne() {
+		playerManager.clearPlayers();
+		
+		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1);
+		
+		assertEquals(1,playerManager.addPlayer(player));
+		
+		List<Player> players = playerManager.getAllPlayers();
+		Player pr = players.get(0);
+		
+		long id = pr.getId();
+		
+		assertNotNull(playerManager.getPlayer(id));
+		
+		Player personRetrieved = playerManager.getPlayer(id);
+		
+		assertEquals(NAME_1, personRetrieved.getName());
+		assertEquals(LASTNAME_1, personRetrieved.getLastName());
+		assertEquals(POSITION_1, personRetrieved.getPosition());
+		assertEquals(AGE_1, personRetrieved.getAge());
+
+	}
 
 }

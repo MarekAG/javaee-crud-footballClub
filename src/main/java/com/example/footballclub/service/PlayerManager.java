@@ -22,6 +22,7 @@ public class PlayerManager {
 	private PreparedStatement addPlayerStmt;
 	private PreparedStatement deletePlayerStmt;
 	private PreparedStatement deleteAllPlayersStmt;
+	private PreparedStatement getPlayerStmt;
 	private PreparedStatement getAllPlayersStmt;
 	private PreparedStatement updatePlayerStmt;
 
@@ -51,6 +52,8 @@ public class PlayerManager {
 					.prepareStatement("DELETE FROM Player");
 			deletePlayerStmt = connection
 					.prepareStatement("DELETE FROM Player WHERE id = ?");
+			getPlayerStmt = connection
+					.prepareStatement("SELECT id, name, lastName, position, age FROM Player WHERE id = ?");
 			getAllPlayersStmt = connection
 					.prepareStatement("SELECT id, name, lastName, position, age FROM Player");
 			updatePlayerStmt = connection
@@ -102,6 +105,32 @@ public class PlayerManager {
 		}
 		return count;
 	}
+	
+	public Player getPlayer(long id) {
+		
+		try {
+			getPlayerStmt.setLong(1, id);
+			
+			ResultSet rs = getPlayerStmt.executeQuery();
+			
+			Player p = new Player();
+			rs.next();
+			p.setId(rs.getLong("id"));
+			p.setName(rs.getString("name"));
+			p.setLastName(rs.getString("lastName"));
+			p.setPosition(rs.getString("position"));
+			p.setAge(rs.getInt("age"));
+			
+			rs.close();
+			return p;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return null;
+		
+	}
 
 	public List<Player> getAllPlayers() {
 		List<Player> players = new ArrayList<Player>();
@@ -111,7 +140,7 @@ public class PlayerManager {
 
 			while (rs.next()) {
 				Player p = new Player();
-				p.setId(rs.getInt("id"));
+				p.setId(rs.getLong("id"));
 				p.setName(rs.getString("name"));
 				p.setLastName(rs.getString("lastName"));
 				p.setPosition(rs.getString("position"));
@@ -119,6 +148,7 @@ public class PlayerManager {
 				players.add(p);
 			}
 
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
