@@ -6,10 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.example.footballclub.domain.Club;
 import com.example.footballclub.domain.Player;
 import com.example.footballclub.service.PlayerManager;
 
-public class PlayerManagerTest {
+public class FootballClubTest {
 	
 	
 	PlayerManager playerManager = new PlayerManager();
@@ -17,12 +18,18 @@ public class PlayerManagerTest {
 	private final static String LASTNAME_1 = "Niciński";
 	private final static String POSITION_1 = "Striker";
 	private final static int AGE_1 = 35;
+	private final static int CLUB_ID_1 = 1;
 	
 	private final static String NAME_2 = "Krzysztof";
 	private final static String LASTNAME_2 = "Sobieraj";
 	private final static String POSITION_2 = "Defender";	
 	private final static int AGE_2 = 31;
+	private final static int CLUB_ID_2 = 2;
 	
+	ClubManager clubManager = new ClubManager();
+	private final static String CLUB_NAME_1 = "Arsenal Londyn";
+	private final static int CLUB_FOUNDED_1 = 1889;
+	private final static String CLUB_LEAGUE_1 = "Premiere League";
 	
 	@Test
 	public void checkConnection(){
@@ -31,8 +38,12 @@ public class PlayerManagerTest {
 	
 	@Test
 	public void checkAdding(){
+		Club club = new Club(CLUB_NAME_1, CLUB_FOUNDED_1, CLUB_LEAGUE_1);
+		clubManager.clearClubs();
+		assertEquals(1, clubManager.addClub(club));
+		assertEquals(1, clubManager.addClub(club));
 		
-		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1);
+		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1, CLUB_ID_1);
 		
 		playerManager.clearPlayers();
 		assertEquals(1,playerManager.addPlayer(player));
@@ -44,13 +55,14 @@ public class PlayerManagerTest {
 		assertEquals(LASTNAME_1, personRetrieved.getLastName());
 		assertEquals(POSITION_1, personRetrieved.getPosition());
 		assertEquals(AGE_1, personRetrieved.getAge());
+		assertEquals(CLUB_ID_1, personRetrieved.getClubID());
 		
 	}
 	
 	@Test
 	public void checkDeleting() {
 		playerManager.clearPlayers();
-		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1);
+		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1, CLUB_ID_1);
 		assertEquals(1,playerManager.addPlayer(player));
 		
 		
@@ -63,12 +75,12 @@ public class PlayerManagerTest {
 	@Test
 	public void checkAllDeleting() {
 		playerManager.clearPlayers();
-		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1);
+		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1, CLUB_ID_1);
 		assertEquals(1,playerManager.addPlayer(player));
 		assertEquals(1,playerManager.addPlayer(player));
 		assertEquals(1,playerManager.addPlayer(player));
 		
-		Player player2 = new Player(NAME_2, LASTNAME_2, POSITION_2, AGE_2);
+		Player player2 = new Player(NAME_2, LASTNAME_2, POSITION_2, AGE_2, CLUB_ID_2);
 		assertEquals(1,playerManager.addPlayer(player2));
 		assertEquals(1,playerManager.addPlayer(player2));
 		assertEquals(1,playerManager.addPlayer(player2));
@@ -89,7 +101,7 @@ public class PlayerManagerTest {
 				
 		playerManager.clearPlayers();
 		
-		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1);
+		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1, CLUB_ID_1);
 		
 		assertEquals(1,playerManager.addPlayer(player));
 		
@@ -98,7 +110,7 @@ public class PlayerManagerTest {
 		
 		assertEquals(POSITION_1, pr.getPosition());
 		
-		assertEquals(1, playerManager.updatePlayer(pr, POSITION_2));
+		assertEquals(1, playerManager.updatePlayer(pr, CLUB_ID_2));
 		
 		players = playerManager.getAllPlayers();
 		Player pr2 = players.get(0);
@@ -112,7 +124,7 @@ public class PlayerManagerTest {
 	public void checkSelectOne() {
 		playerManager.clearPlayers();
 		
-		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1);
+		Player player = new Player(NAME_1, LASTNAME_1, POSITION_1, AGE_1, CLUB_ID_1);
 		
 		assertEquals(1,playerManager.addPlayer(player));
 		
@@ -129,6 +141,7 @@ public class PlayerManagerTest {
 		assertEquals(LASTNAME_1, personRetrieved.getLastName());
 		assertEquals(POSITION_1, personRetrieved.getPosition());
 		assertEquals(AGE_1, personRetrieved.getAge());
+		assertEquals(CLUB_ID_1, personRetrieved.getClubID());
 
 	}
 

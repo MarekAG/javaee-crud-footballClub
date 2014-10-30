@@ -8,6 +8,7 @@ public class Player {
 	private String lastName;
 	private String position;
 	private int age;
+	private int clubID;
 	
 	public Player() {
 	}
@@ -20,6 +21,16 @@ public class Player {
 		this.age = age;
 		
 	}
+	public Player(String name, String lastName, String position, int age,
+			int clubID) {
+		super();
+		this.name = name;
+		this.lastName = lastName;
+		this.position = position;
+		this.age = age;
+		this.clubID = clubID;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -55,6 +66,14 @@ public class Player {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public int getClubID() {
+		return clubID;
+	}
+
+	public void setClubID(int clubID) {
+		this.clubID = clubID;
 	}
 
 }
