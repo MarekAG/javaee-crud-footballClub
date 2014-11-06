@@ -13,6 +13,17 @@ import com.example.footballclub.service.PlayerManager;
 public class FootballClubTest {
 	
 	
+	
+	
+	ClubManager clubManager = new ClubManager();
+	private final static String CLUB_NAME_1 = "Arsenal Londyn";
+	private final static int CLUB_FOUNDED_1 = 1889;
+	private final static String CLUB_LEAGUE_1 = "Premiere League";
+	
+	private final static String CLUB_NAME_2 = "Lech Poznań";
+	private final static int CLUB_FOUNDED_2 = 1926;
+	private final static String CLUB_LEAGUE_2 = "Polska Ekstraklasa";
+	
 	PlayerManager playerManager = new PlayerManager();
 	private final static String NAME_1 = "Grzegorz";
 	private final static String LASTNAME_1 = "Niciński";
@@ -26,24 +37,15 @@ public class FootballClubTest {
 	private final static int AGE_2 = 31;
 	private final static long CLUB_ID_2 = 2;
 	
-	ClubManager clubManager = new ClubManager();
-	private final static String CLUB_NAME_1 = "Arsenal Londyn";
-	private final static int CLUB_FOUNDED_1 = 1889;
-	private final static String CLUB_LEAGUE_1 = "Premiere League";
-	
-	private final static String CLUB_NAME_2 = "Lech Poznań";
-	private final static int CLUB_FOUNDED_2 = 1926;
-	private final static String CLUB_LEAGUE_2 = "Polska Ekstraklasa";
-	
-	
-	@Test
-	public void checkPLayerConnection() {
-		assertNotNull(playerManager.getConnection());
-	}
 	
 	@Test
 	public void checkClubConnection() {
 		assertNotNull(clubManager.getConnection());
+	}
+	
+	@Test
+	public void checkPLayerConnection() {
+		assertNotNull(playerManager.getConnection());
 	}
 	
 	@Test
@@ -174,6 +176,7 @@ public class FootballClubTest {
 	@Test
 	public void checkAllClubsDeleting() {
 		playerManager.clearPlayers();
+		clubManager.clearClubs();
 		
 		Club club = new Club(CLUB_NAME_1, CLUB_FOUNDED_1, CLUB_LEAGUE_1);
 		assertEquals(1,clubManager.addClub(club));
