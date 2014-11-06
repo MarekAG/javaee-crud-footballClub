@@ -8,7 +8,7 @@ public class Player {
 	private String lastName;
 	private String position;
 	private int age;
-	private int clubID;
+	private long clubID;
 	
 	public Player() {
 	}
@@ -22,7 +22,7 @@ public class Player {
 		
 	}
 	public Player(String name, String lastName, String position, int age,
-			int clubID) {
+			long clubID) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
@@ -68,11 +68,11 @@ public class Player {
 		this.age = age;
 	}
 
-	public int getClubID() {
+	public long getClubID() {
 		return clubID;
 	}
 
-	public void setClubID(int clubID) {
+	public void setClubID(long clubID) {
 		this.clubID = clubID;
 	}
 
